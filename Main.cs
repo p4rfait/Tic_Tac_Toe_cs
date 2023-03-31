@@ -9,11 +9,13 @@ public class MainClass
   public static void Main(string[] args)
   {
     ClaseMainMenu MainMenu = new ClaseMainMenu();
+    
+    OperatingSystem os = Environment.OSVersion;
+    if (os.Platform == PlatformID.Win32NT)
+    {Console.SetWindowSize(55,30);}
 
-    /*Esto simplemente obtiene el tamano de la ventana para saber si es optima,
-      si no lo es no se ejecuta,
-      Siempre hago esto cuando imprimo un titulo con arte ascii*/
-      
+    Console.Title="Tic-Tac-Toe_cs";
+
     if (Console.WindowWidth < 55 || Console.WindowHeight < 30)
     {
       Console.ForegroundColor=ConsoleColor.DarkRed;

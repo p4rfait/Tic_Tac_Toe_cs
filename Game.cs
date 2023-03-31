@@ -1,6 +1,7 @@
 namespace Game;
 using MyDecorators;
 using ErrorMessages;
+using MainMenu;
 
 class ClaseGame
 {
@@ -17,6 +18,7 @@ class ClaseGame
     {
         ClaseDecorators Decorador = new ClaseDecorators();
         ClaseErrorMessages ErrorMessage = new ClaseErrorMessages();
+        ClaseMainMenu MainMenu = new ClaseMainMenu();
 
         //Cuadricula
         string[,] Grid = new string[3, 3] { 
@@ -136,20 +138,23 @@ class ClaseGame
                     Console.WriteLine("Juega \""+p1Name+"\" [X]");
                     Decorador.Separator(21);
                     Console.Write("Ingrese la fila: ");
-                    int x = Convert.ToInt16(Console.ReadLine());
-                    
-                    if(x<1 || x>3){
-                        ErrorMessage.Message("Fila no valida, Intenta de nuevo");
-                        goto GetX;
-                    }
-
-                    if((Grid[x-1,0]!=N) && (Grid[x-1,1]!=N) && (Grid[x-1,2]!=N))
+                    if(Int16.TryParse(Console.ReadLine(), out short x))
                     {
-                        ErrorMessage.Message("No hay ninguna casilla disponible en la fila ["+(x)+"]");
+                        if(x<1 || x>3){
+                            ErrorMessage.Message("Fila no valida, Intenta de nuevo");
+                            goto GetX;
+                        }
+                        if((Grid[x-1,0]!=N) && (Grid[x-1,1]!=N) && (Grid[x-1,2]!=N))
+                        {
+                            ErrorMessage.Message("No hay ninguna casilla disponible en la fila ["+(x)+"]");
+                            goto GetX;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage.Message("Solo puedes ingresar numeros");
                         goto GetX;
                     }
-
-
                     GetY:
                     Console.Clear();
                     drawGrid(false,x);
@@ -159,21 +164,26 @@ class ClaseGame
                     Console.WriteLine("Nota: Puedes ingresar <0> para cambiar la fila");
                     Console.Write("\nIngrese la columna: ");
                     
-                    int y = Convert.ToInt16(Console.ReadLine());
-                    
-                    if(y==0){
-                        goto GetX;
+                    if(Int16.TryParse(Console.ReadLine(), out short y)){
+                        if(y==0){
+                            goto GetX;
+                        }
+                        else if(y<0 || y>3){
+                            ErrorMessage.Message("Columna no valida, Intenta de nuevo");
+                            goto GetY;
+                        }
+                        else if(Grid[x-1,y-1] != N){
+                            ErrorMessage.Message("Esa casilla ya esta ocupada intente de nuevo");
+                            goto GetY;
+                        }
+                        else{
+                            Grid[x-1,y-1]=oo;    
+                        }
                     }
-                    else if(y<0 || y>3){
-                        ErrorMessage.Message("Columna no valida, Intenta de nuevo");
+                    else
+                    {
+                        ErrorMessage.Message("Solo puedes ingresar numeros");
                         goto GetY;
-                    }
-                    else if(Grid[x-1,y-1] != N){
-                        ErrorMessage.Message("Esa casilla ya esta ocupada intente de nuevo");
-                        goto GetY;
-                    }
-                    else{
-                        Grid[x-1,y-1]=xx;
                     }
                     
                     if(CheckWin(Grid,xx))
@@ -182,6 +192,8 @@ class ClaseGame
                         drawGrid(true);
                         Console.WriteLine("HA GANADO "+p1Name);
                         tie = false;
+                        Console.WriteLine("\nPulsa la tecla [Enter]para regresar al menu principal");
+                        Console.ReadLine();
                         break;
                     }
                 }
@@ -193,15 +205,22 @@ class ClaseGame
                     Console.WriteLine("Juega \""+p2Name+"\" [O]");
                     Decorador.Separator(21);
                     Console.Write("Ingrese la fila: ");
-                    int x = Convert.ToInt16(Console.ReadLine());
-                    if(x<1 || x>3){
-                        ErrorMessage.Message("Fila no valida, Intenta de nuevo");
-                        goto GetX;
-                    }
 
-                    if((Grid[x-1,0]!=N) && (Grid[x-1,1]!=N) && (Grid[x-1,2]!=N))
+                    if(Int16.TryParse(Console.ReadLine(), out short x))
                     {
-                        ErrorMessage.Message("No hay ninguna casilla disponible en la fila ["+(x)+"]");
+                        if(x<1 || x>3){
+                            ErrorMessage.Message("Fila no valida, Intenta de nuevo");
+                            goto GetX;
+                        }
+                        if((Grid[x-1,0]!=N) && (Grid[x-1,1]!=N) && (Grid[x-1,2]!=N))
+                        {
+                            ErrorMessage.Message("No hay ninguna casilla disponible en la fila ["+(x)+"]");
+                            goto GetX;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage.Message("Solo puedes ingresar numeros");
                         goto GetX;
                     }
 
@@ -213,30 +232,37 @@ class ClaseGame
                     Decorador.Separator(21);
                     Console.WriteLine("Nota: Puedes ingresar <0> para cambiar la fila");
                     Console.Write("\nIngrese la columna: ");
+
+                    if(Int16.TryParse(Console.ReadLine(), out short y)){
+                        if(y==0){
+                            goto GetX;
+                        }
+                        else if(y<0 || y>3){
+                            ErrorMessage.Message("Columna no valida, Intenta de nuevo");
+                            goto GetY;
+                        }
+                        else if(Grid[x-1,y-1] != N){
+                            ErrorMessage.Message("Esa casilla ya esta ocupada intente de nuevo");
+                            goto GetY;
+                        }
+                        else{
+                            Grid[x-1,y-1]=oo;    
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage.Message("Solo puedes ingresar numeros");
+                        goto GetY;
+                    }
                     
-                    int y = Convert.ToInt16(Console.ReadLine());
-
-                    if(y==0){
-                        goto GetX;
-                    }
-                    else if(y<0 || y>3){
-                        ErrorMessage.Message("Columna no valida, Intenta de nuevo");
-                        goto GetY;
-                    }
-                    else if(Grid[x-1,y-1] != N){
-                        ErrorMessage.Message("Esa casilla ya esta ocupada intente de nuevo");
-                        goto GetY;
-                    }
-                    else{
-                        Grid[x-1,y-1]=oo;    
-                    }
-
                     if(CheckWin(Grid,oo))
                     {
                         Console.Clear();
                         drawGrid(true);
                         Console.WriteLine("HA GANADO "+p2Name);
                         tie = false;
+                        Console.WriteLine("\nPulsa la tecla [Enter] para regresar al menu principal");
+                        Console.ReadLine();
                         break;
                     }
                 }
@@ -246,6 +272,7 @@ class ClaseGame
                 drawGrid(true);
                 Console.WriteLine("     EMPATE!");
             }
+            MainMenu.TitleMenu();
         }
 
         //Checkear escenarios de victoria
