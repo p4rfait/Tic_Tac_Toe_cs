@@ -12,6 +12,11 @@ class ClaseGame
     public string xx = " X ";
     public string oo = " O ";
     public string N = "   ";
+
+    public int Xwins = 0;
+    public int Owins = 0;
+    public int ties = 0;
+    
     
 
     public void StartGame()
@@ -31,9 +36,9 @@ class ClaseGame
         Console.Clear();
 
 		Decorador.Displaylogo(false);
-        Console.Write("Ingrese el nombre de el jugador 1\n>");
+        Console.Write("Ingrese el nombre de el jugador 1\nDejar en blanco para nombrar automaticamente\n> ");
         p1Name = Console.ReadLine();
-        Console.Write("\nIngrese el nombre de el jugador 2\n>");
+        Console.Write("\nIngrese el nombre de el jugador 2\nDejar en blanco para nombrar automaticamente\n> ");
         p2Name = Console.ReadLine();
 
         if(string.IsNullOrWhiteSpace(p1Name))
@@ -192,6 +197,7 @@ class ClaseGame
                         drawGrid(true);
                         Console.WriteLine("\nHA GANADO "+p1Name);
                         tie = false;
+                        Xwins=Xwins+1;
                         break;
                     }
                 }
@@ -259,6 +265,7 @@ class ClaseGame
                         drawGrid(true);
                         Console.WriteLine("\nHA GANADO "+p2Name);
                         tie = false;
+                        Owins=Owins+1;
                         break;
                     }
                 }
@@ -266,10 +273,19 @@ class ClaseGame
             if(tie == true){
                 Console.Clear();
                 drawGrid(true);
+                ties = ties+1;
                 Console.WriteLine("     EMPATE!");
             }
+
+            if(Xwins>0 || Owins>0 || ties>0){
+                Decorador.Separator(21);
+                Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
+                Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
+                Console.WriteLine("-Empates: "+ties);
+            }
+
             Decorador.Separator(21);
-            Console.WriteLine("(1) Volver a jugar");
+            Console.WriteLine("(1) REVANCHA!");
             Console.WriteLine("(2) Volver al menu principal");
             Console.WriteLine("(3) Salir");
             Decorador.Separator(21);
@@ -281,11 +297,16 @@ class ClaseGame
 				switch (selecton)
 				{
 					case 1:
-                        StartGame();
-						isValidInput = true;
+                    Grid = new string[3, 3] { 
+                        {  N ,  N ,  N  }, 
+                        {  N ,  N ,  N  }, 
+                        {  N ,  N ,  N  }
+                    };
+                        GameLoop();
+						//isValidInput = true;
 						break;
 					case 2: 
-						isValidInput = true;
+						//isValidInput = true;
                         MainMenu.TitleMenu();
 						break;
                     case 3: 
