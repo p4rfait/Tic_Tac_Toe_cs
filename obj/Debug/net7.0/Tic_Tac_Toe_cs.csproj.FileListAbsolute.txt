@@ -1,0 +1,15 @@
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/bin/Debug/net7.0/Tic_Tac_Toe_cs
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/bin/Debug/net7.0/Tic_Tac_Toe_cs.deps.json
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/bin/Debug/net7.0/Tic_Tac_Toe_cs.runtimeconfig.json
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/bin/Debug/net7.0/Tic_Tac_Toe_cs.dll
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/bin/Debug/net7.0/Tic_Tac_Toe_cs.pdb
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.csproj.AssemblyReference.cache
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.GeneratedMSBuildEditorConfig.editorconfig
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.AssemblyInfoInputs.cache
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.AssemblyInfo.cs
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.csproj.CoreCompileInputs.cache
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.dll
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/refint/Tic_Tac_Toe_cs.dll
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.pdb
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/Tic_Tac_Toe_cs.genruntimeconfig.cache
+/home/p4rfait/proyectos/Tic_Tac_Toe_cs/obj/Debug/net7.0/ref/Tic_Tac_Toe_cs.dll
