@@ -177,7 +177,7 @@ class ClaseGame
                             goto GetY;
                         }
                         else{
-                            Grid[x-1,y-1]=oo;    
+                            Grid[x-1,y-1]=xx;
                         }
                     }
                     else
