@@ -276,13 +276,10 @@ class ClaseGame
                 ties = ties+1;
                 Console.WriteLine("     EMPATE!");
             }
-
-            if(Xwins>0 || Owins>0 || ties>0){
-                Decorador.Separator(21);
-                Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
-                Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
-                Console.WriteLine("-Empates: "+ties);
-            }
+            Decorador.Separator(21);
+            Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
+            Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
+            Console.WriteLine("-Empates: "+ties);
 
             Decorador.Separator(21);
             Console.WriteLine("(1) REVANCHA!");
