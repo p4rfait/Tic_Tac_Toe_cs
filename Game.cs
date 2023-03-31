@@ -88,7 +88,7 @@ class ClaseGame
         Console.Clear();
         GameLoop();
 
-        /*Esta funcion dibujara la tabla con sus valores, hace uso de la funcion value (linea 40)*/
+        /*Esta funcion dibujara la tabla con sus valores, hace uso de la funcion value (linea 116)*/
         void drawGrid(bool arrow,int selection=0){
             Console.ForegroundColor=ConsoleColor.Black;
             Console.Write(arrow?"\n  v":"\n  >");
@@ -190,10 +190,8 @@ class ClaseGame
                     {
                         Console.Clear();
                         drawGrid(true);
-                        Console.WriteLine("HA GANADO "+p1Name);
+                        Console.WriteLine("\nHA GANADO "+p1Name);
                         tie = false;
-                        Console.WriteLine("\nPulsa la tecla [Enter]para regresar al menu principal");
-                        Console.ReadLine();
                         break;
                     }
                 }
@@ -259,10 +257,8 @@ class ClaseGame
                     {
                         Console.Clear();
                         drawGrid(true);
-                        Console.WriteLine("HA GANADO "+p2Name);
+                        Console.WriteLine("\nHA GANADO "+p2Name);
                         tie = false;
-                        Console.WriteLine("\nPulsa la tecla [Enter] para regresar al menu principal");
-                        Console.ReadLine();
                         break;
                     }
                 }
@@ -272,7 +268,39 @@ class ClaseGame
                 drawGrid(true);
                 Console.WriteLine("     EMPATE!");
             }
-            MainMenu.TitleMenu();
+            Decorador.Separator(21);
+            Console.WriteLine("(1) Volver a jugar");
+            Console.WriteLine("(2) Volver al menu principal");
+            Console.WriteLine("(3) Salir");
+            Decorador.Separator(21);
+            Console.Write("> ");
+            string? input = Console.ReadLine();
+			if (Int16.TryParse(input, out short result))
+			{
+				short selecton = result;
+				switch (selecton)
+				{
+					case 1:
+                        StartGame();
+						isValidInput = true;
+						break;
+					case 2: 
+						isValidInput = true;
+                        MainMenu.TitleMenu();
+						break;
+                    case 3: 
+                        Environment.Exit(0);
+                    break;
+					default:
+						//Funcion personalizada para imprimir mensaje de error con formato (ver <ErrorMessages.cs>)
+						ErrorMessage.Message("El número ingresado no corresponde a ninguna opción.");
+						break;
+				}
+			}
+			else
+			{
+				ErrorMessage.Message("La entrada no es un valor numérico válido.");
+			}
         }
 
         //Checkear escenarios de victoria
