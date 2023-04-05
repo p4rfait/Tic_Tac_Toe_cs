@@ -5,7 +5,6 @@ using MainMenu;
 
 class ClaseGame
 {
-    bool tie = true;
     string? p1Name;
     string? p2Name;
     //public bool arrow;
@@ -16,8 +15,6 @@ class ClaseGame
     public int Xwins = 0;
     public int Owins = 0;
     public int ties = 0;
-    
-    
 
     public void StartGame()
     {
@@ -133,6 +130,7 @@ class ClaseGame
         }
 
         void GameLoop(){
+            bool tie = true;
             for(int i=0;i<9;i++)
             {
                 if(i%2==0){
