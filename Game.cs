@@ -16,6 +16,8 @@ class ClaseGame
     public int Owins = 0;
     public int ties = 0;
 
+    string? winner;
+
     public void StartGame()
     {
         ClaseDecorators Decorador = new ClaseDecorators();
@@ -191,9 +193,7 @@ class ClaseGame
                     
                     if(CheckWin(Grid,xx))
                     {
-                        Console.Clear();
-                        drawGrid(true);
-                        Console.WriteLine("\nHA GANADO "+p1Name);
+                        winner = p1Name;
                         tie = false;
                         Xwins=Xwins+1;
                         break;
@@ -225,7 +225,6 @@ class ClaseGame
                         ErrorMessage.Message("Solo puedes ingresar numeros");
                         goto GetX;
                     }
-
                     GetY:
                     Console.Clear();
                     drawGrid(false,x);
@@ -259,9 +258,7 @@ class ClaseGame
                     
                     if(CheckWin(Grid,oo))
                     {
-                        Console.Clear();
-                        drawGrid(true);
-                        Console.WriteLine("\nHA GANADO "+p2Name);
+                        winner = p1Name;
                         tie = false;
                         Owins=Owins+1;
                         break;
@@ -274,49 +271,57 @@ class ClaseGame
                 ties = ties+1;
                 Console.WriteLine("     EMPATE!");
             }
-            Decorador.Separator(21);
-            Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
-            Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
-            Console.WriteLine("-Empates: "+ties);
 
-            Decorador.Separator(21);
-            Console.WriteLine("(1) REVANCHA!");
-            Console.WriteLine("(2) Volver al menu principal");
-            Console.WriteLine("(3) Salir");
-            Decorador.Separator(21);
-            Console.Write("> ");
-            string? input = Console.ReadLine();
-			if (Int16.TryParse(input, out short result))
-			{
-				short selecton = result;
-				switch (selecton)
-				{
-					case 1:
-                    Grid = new string[3, 3] { 
-                        {  N ,  N ,  N  }, 
-                        {  N ,  N ,  N  }, 
-                        {  N ,  N ,  N  }
-                    };
-                        GameLoop();
-						//isValidInput = true;
-						break;
-					case 2: 
-						//isValidInput = true;
-                        MainMenu.TitleMenu();
-						break;
-                    case 3: 
-                        Environment.Exit(0);
-                    break;
-					default:
-						//Funcion personalizada para imprimir mensaje de error con formato (ver <ErrorMessages.cs>)
-						ErrorMessage.Message("El número ingresado no corresponde a ninguna opción.");
-						break;
-				}
-			}
-			else
-			{
-				ErrorMessage.Message("La entrada no es un valor numérico válido.");
-			}
+            bool isValidInput = false;
+            while (!isValidInput)
+		    {
+                Console.Clear();
+                drawGrid(true);
+                Console.WriteLine("\nHA GANADO \""+winner+"\"");
+                Decorador.Separator(21);
+                Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
+                Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
+                Console.WriteLine("-Empates: "+ties);
+
+                Decorador.Separator(21);
+                Console.WriteLine("(1) REVANCHA!");
+                Console.WriteLine("(2) Volver al menu principal");
+                Console.WriteLine("(3) Salir");
+                Decorador.Separator(21);
+                Console.Write("> ");
+                string? input = Console.ReadLine();
+                if (Int16.TryParse(input, out short result))
+                {
+                    short selecton = result;
+                    switch (selecton)
+                    {
+                        case 1:
+                        Grid = new string[3, 3] { 
+                            {  N ,  N ,  N  }, 
+                            {  N ,  N ,  N  }, 
+                            {  N ,  N ,  N  }
+                        };
+                            GameLoop();
+                            //isValidInput = true;
+                            break;
+                        case 2: 
+                            //isValidInput = true;
+                            MainMenu.TitleMenu();
+                            break;
+                        case 3: 
+                            Environment.Exit(0);
+                        break;
+                        default:
+                            //Funcion personalizada para imprimir mensaje de error con formato (ver <ErrorMessages.cs>)
+                            ErrorMessage.Message("El número ingresado no corresponde a ninguna opción.");
+                            break;
+                    }
+                }
+                else
+                {
+                    ErrorMessage.Message("La entrada no es un valor numérico válido.");
+                }
+            }
         }
 
         //Checkear escenarios de victoria
