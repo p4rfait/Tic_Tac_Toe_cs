@@ -16,8 +16,6 @@ class ClaseGame
     public int Owins = 0;
     public int ties = 0;
 
-    string? winner;
-
     public void StartGame()
     {
         ClaseDecorators Decorador = new ClaseDecorators();
@@ -133,6 +131,8 @@ class ClaseGame
 
         void GameLoop(){
             bool tie = true;
+            string? winner = null;
+            
             for(int i=0;i<9;i++)
             {
                 if(i%2==0){
@@ -140,7 +140,9 @@ class ClaseGame
                     Console.Clear();
                     drawGrid(true);
                     Decorador.Separator(21);
+                    
                     Console.WriteLine("Juega \""+p1Name+"\" [X]");
+                    
                     Decorador.Separator(21);
                     Console.Write("Ingrese la fila: ");
                     if(Int16.TryParse(Console.ReadLine(), out short x))
@@ -258,7 +260,7 @@ class ClaseGame
                     
                     if(CheckWin(Grid,oo))
                     {
-                        winner = p1Name;
+                        winner = p2Name;
                         tie = false;
                         Owins=Owins+1;
                         break;
@@ -266,10 +268,7 @@ class ClaseGame
                 }
             }
             if(tie == true){
-                Console.Clear();
-                drawGrid(true);
                 ties = ties+1;
-                Console.WriteLine("     EMPATE!");
             }
 
             bool isValidInput = false;
@@ -277,7 +276,20 @@ class ClaseGame
 		    {
                 Console.Clear();
                 drawGrid(true);
-                Console.WriteLine("\nHA GANADO \""+winner+"\"");
+
+                if(tie==false){
+                    if(winner==p1Name){
+                        Console.ForegroundColor=ConsoleColor.Red;
+                    }else if(winner==p2Name){
+                        Console.ForegroundColor=ConsoleColor.Blue;
+                    }
+                    Console.WriteLine("\nHA GANADO \""+winner+"\"");
+                    Console.BackgroundColor=ConsoleColor.Black;
+                }
+                else
+                {
+                    Console.WriteLine("       EMPATE!");
+                }
                 Decorador.Separator(21);
                 Console.WriteLine("-Victorias de \""+p1Name+"\": "+Xwins);
                 Console.WriteLine("-Victorias de \""+p2Name+"\": "+Owins);
@@ -296,11 +308,11 @@ class ClaseGame
                     switch (selecton)
                     {
                         case 1:
-                        Grid = new string[3, 3] { 
-                            {  N ,  N ,  N  }, 
-                            {  N ,  N ,  N  }, 
-                            {  N ,  N ,  N  }
-                        };
+                            Grid = new string[3, 3] { 
+                                {  N ,  N ,  N  }, 
+                                {  N ,  N ,  N  }, 
+                                {  N ,  N ,  N  }
+                            };
                             GameLoop();
                             //isValidInput = true;
                             break;
@@ -309,6 +321,7 @@ class ClaseGame
                             MainMenu.TitleMenu();
                             break;
                         case 3: 
+                            Console.Clear();
                             Environment.Exit(0);
                         break;
                         default:
