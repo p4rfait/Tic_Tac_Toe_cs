@@ -7,7 +7,7 @@ class ClaseGame
 {
     string? p1Name;
     string? p2Name;
-    //public bool arrow;
+
     public string xx = " X ";
     public string oo = " O ";
     public string N = "   ";
